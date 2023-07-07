@@ -1,5 +1,8 @@
 package com.github.curriculeon;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by leon on 1/29/18.
  */
@@ -91,8 +94,23 @@ public class StringArrayUtils {
      * @param array array of chars
      * @return array of Strings with consecutive duplicates removes
      */ // TODO
-    public static String[] removeConsecutiveDuplicates(String[] array) {
-        return null;
+    public static String[] removeConsecutiveDuplicates(final String[] array) {
+        final List<String> list = new ArrayList<>();
+        final int lastIndex = array.length-1;
+        for (int currentIndex = 1; currentIndex < array.length; currentIndex++) {
+            final String previousElement = array[currentIndex-1];
+            final String currentElement = array[currentIndex];
+            final boolean isConsecutive = previousElement.equals(currentElement);
+            final boolean isFinalIteration = currentIndex==lastIndex;
+            if (!isConsecutive) {
+                list.add(previousElement);
+            }
+
+            if(isFinalIteration) {
+                list.add(currentElement);
+            }
+        }
+        return list.toArray(new String[0]);
     }
 
     /**
